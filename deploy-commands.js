@@ -1,7 +1,12 @@
+require('dotenv').config();
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./auth.json');
+const clientId = process.env.DC_CLIENTID;
+const guildId = process.env.DC_GUILDID;
+const token = process.env.DC_TOKEN;
+
+const {command} = require('./data.json');
 
 // const commands = [
 // 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
@@ -13,7 +18,7 @@ const { clientId, guildId, token } = require('./auth.json');
 // 	.map(command => command.toJSON());
 const commands = [];
 const data = new SlashCommandBuilder()
-    .setName('加入組別')
+    .setName(command)
     .setDescription('Replies with Pong!')
     .addStringOption(option => option.setName('input').setDescription('The input to echo back'))
 

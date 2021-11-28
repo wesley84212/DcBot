@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
+const {command, imageFile, privateMessage} = require("./data.json");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
 console.log('get env=>',process.env.DC_CLIENTID);
 client.once('ready', () => {
@@ -12,7 +13,7 @@ client.on('interactionCreate', async interaction => {
 				await interaction.reply('Pong!');
 			} else if (commandName === 'server') {
 				await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-			} else if (commandName === '加入組別') {
+			} else if (commandName === command) {
 				const inputStr = interaction.options.getString('input')
 				const member = interaction.member;
 				const role = interaction.guild.roles.cache.find((r)=>{
@@ -24,9 +25,10 @@ client.on('interactionCreate', async interaction => {
 				try{
 					member.roles.add(role);
 					console.log(`名字: ${interaction.user.tag}\n已加入: ${role.name}`)
-					await interaction.user.send(`名字: ${interaction.user.tag}\n已加入: ${role.name}`)
-					await interaction.user.send({files:["./test.png"]})
-					await interaction.reply(`名字: ${interaction.user.tag}已被傳送`)
+					await interaction.user.send({files:[imageFile]})
+					await interaction.user.send(privateMessage)
+					await interaction.user.send({files:["./messageImg.jpg"]})
+					await interaction.reply(`試煉者: ${interaction.user.tag}已被傳送`)
 				 }catch(e){
 					console.log(e)
 					console.error(e)
