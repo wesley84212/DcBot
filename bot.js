@@ -14,7 +14,8 @@ client.on('interactionCreate', async interaction => {
 			} else if (commandName === 'server') {
 				await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 			} else if (commandName === command) {
-				const inputStr = interaction.options.getString('input')
+				let inputStr = interaction.options.getString('input')
+				inputStr = inputStr.toUpperCase();
 				const member = interaction.member;
 				const role = interaction.guild.roles.cache.find((r)=>{
 					return r.name.indexOf(inputStr) > -1
