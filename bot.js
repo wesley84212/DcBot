@@ -28,7 +28,7 @@ client.on('interactionCreate', async interaction => {
 					console.log(`名字: ${interaction.user.tag}\n已加入: ${role.name}`)
 					await interaction.user.send({files:[imageFile]})
 					await interaction.user.send(privateMessage)
-					await interaction.user.send("「請注意未加上特別存取碼的儲藏室內容為錯誤資訊，請勿直接存取，否則取消資格");
+					await interaction.user.send("「請注意未加上特別存取碼的儲藏室內容為錯誤資訊，請勿直接存取，否則取消資格」");
 					await interaction.user.send({files:["./messageImg.jpg"]})
 					await interaction.reply(`試煉者: ${interaction.user.tag}已被傳送`)
 				 }catch(e){
